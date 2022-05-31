@@ -114,7 +114,7 @@ export type Options = {
     withFinalC: boolean;
 };
 
-export const defaultOptions = {
+export const DEFAULT_PAINO_OPTIONS = {
     el: "#paino",
     startOctave: 3,
     octaves: 2,
@@ -125,7 +125,7 @@ class Paino {
     private options: Options;
     private wrapper: HTMLElement;
     constructor(options = {}) {
-        this.options = Object.assign({}, defaultOptions, options);
+        this.options = Object.assign({}, DEFAULT_PAINO_OPTIONS, options);
     }
     setNotes(notes: string[]): Paino {
         this.clearNotes();

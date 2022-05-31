@@ -1,3 +1,4 @@
 import Paino from "./Paino";
+import init from "./init";
 
-export { Paino };
+export { Paino, init };
