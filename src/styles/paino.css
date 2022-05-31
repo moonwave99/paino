@@ -1,0 +1,49 @@
+:root {
+    --paino-height: 100px;
+    --paino-white-key-width: 1.5rem;
+    --paino-black-key-width: 1rem;
+    --paino-black-key-height: 60%;
+    --paino-white-key-highlight-color: dodgerblue;
+    --paino-black-key-highlight-color: dodgerblue;
+}
+
+.paino {
+    height: var(--paino-height);
+    width: fit-content;
+    border: 1px solid black;
+    display: flex;
+    overflow-x: auto;
+}
+
+.paino .key:not(:last-child) {
+    border-right: 1px solid black;
+}
+
+.paino .key.color-white {
+    width: var(--paino-white-key-width);
+    background-color: white;
+}
+
+.paino .key.color-black {
+    background-color: black;
+    height: var(--paino-black-key-height);
+    width: var(--paino-black-key-width);
+    margin: 0 0 0 calc(var(--paino-black-key-width) / -2);
+    z-index: 1;
+}
+
+.paino .key.color-white:nth-of-type(12n + 3),
+.paino .key.color-white:nth-of-type(12n + 5),
+.paino .key.color-white:nth-of-type(12n + 8),
+.paino .key.color-white:nth-of-type(12n + 10),
+.paino .key.color-white:nth-of-type(12n + 12) {
+    margin: 0 0 0 calc(var(--paino-black-key-width) / -2);
+}
+
+.paino .key.color-white.key-on {
+    background-color: var(--paino-white-key-highlight-color);
+}
+
+.paino .key.color-black.key-on {
+    background-color: var(--paino-black-key-highlight-color);
+}

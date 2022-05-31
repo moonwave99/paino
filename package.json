@@ -1,6 +1,6 @@
 {
     "name": "@moonwave99/paino",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Simple HTML/CSS Piano diagram generator",
     "main": "dist/paino.cjs.js",
     "module": "dist/paino.esm.js",
@@ -10,7 +10,8 @@
     "files": [
         "dist/paino.*.js",
         "dist/paino.*.map",
-        "dist/**/*.d.ts"
+        "dist/**/*.d.ts",
+        "src/styles/paino.css"
     ],
     "scripts": {
         "lint": "npx eslint ./src --ext .js,.jsx,.ts,.tsx",
