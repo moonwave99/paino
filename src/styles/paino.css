@@ -30,6 +30,9 @@
     width: var(--paino-black-key-width);
     margin: 0 0 0 calc(var(--paino-black-key-width) / -2);
     z-index: 1;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 }
 
 .paino .key.color-white:nth-of-type(12n + 3),

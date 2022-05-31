@@ -119,6 +119,46 @@ test.serial("Paino - setNotes - enharmonics", (t) => {
     );
 });
 
+test.serial("Paino - setNotes - without octave", (t) => {
+    const piano = new Paino();
+
+    piano.render().setNotes(["C", "E", "G"]);
+
+    const wrapper = document.querySelector("#paino");
+
+    t.deepEqual(
+        [...wrapper.querySelectorAll(".key-on")].map((el: HTMLElement) => ({
+            ...el.dataset,
+        })),
+        [
+            {
+                chroma: "0",
+                color: "white",
+                enharmonics: "B#",
+                note: "C",
+                noteWithOctave: "C4",
+                octave: "4",
+            },
+            {
+                chroma: "4",
+                color: "white",
+                enharmonics: "Fb",
+                note: "E",
+                noteWithOctave: "E4",
+                octave: "4",
+            },
+            {
+                chroma: "7",
+                color: "white",
+                enharmonics: "",
+                note: "G",
+                noteWithOctave: "G4",
+                octave: "4",
+            },
+        ]
+    );
+});
+
 test.serial("Paino - clearNotes", (t) => {
     const piano = new Paino();
 

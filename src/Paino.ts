@@ -5,6 +5,11 @@ type ScaleNote = {
     enharmonics?: string[];
 };
 
+type ScaleNoteWithOctave = ScaleNote & {
+    octave: number;
+    noteWithOctave: string;
+};
+
 const CHROMATIC_SCALE: ScaleNote[] = [
     {
         chroma: 0,
@@ -123,14 +128,18 @@ class Paino {
         this.options = Object.assign({}, defaultOptions, options);
     }
     setNotes(notes: string[]): Paino {
+        this.clearNotes();
+        const middleOctave = this.getMiddleOctave();
         const keys = [...this.wrapper.querySelectorAll(".key")];
         notes.forEach((n) =>
             keys
                 .find((el: HTMLElement) => {
-                    const { chroma, octave } = el.dataset;
+                    const { chroma: dataChroma, octave: dataOctave } =
+                        el.dataset;
                     const parsed = parseNote(n);
+                    const octave = parsed.octave || middleOctave;
                     return (
-                        +chroma === parsed.chroma && +octave === parsed.octave
+                        +dataChroma === parsed.chroma && +dataOctave === octave
                     );
                 })
                 ?.classList.add("key-on")
@@ -159,9 +168,7 @@ class Paino {
         this.wrapper = typeof el === "string" ? document.querySelector(el) : el;
         this.wrapper.classList.add("paino");
 
-        const createKey = (
-            note: ScaleNote & { octave: number; noteWithOctave: string }
-        ): void => {
+        const createKey = (note: ScaleNoteWithOctave): void => {
             const span = document.createElement("span");
             span.classList.add("key");
 
@@ -173,25 +180,27 @@ class Paino {
             this.wrapper.append(span);
         };
 
-        Array.from({ length: octaves }, (_, octave) => {
+        Array.from({ length: octaves }, (_, octave) =>
             CHROMATIC_SCALE.forEach((x) =>
                 createKey({
                     ...x,
                     octave: startOctave + octave,
                     noteWithOctave: `${x.note}${startOctave + octave}`,
                 })
-            );
-        });
+            )
+        );
 
         if (withFinalC) {
             createKey({
-                chroma: 0,
-                note: "C",
-                color: "white",
+                ...CHROMATIC_SCALE[0],
                 octave: startOctave + octaves,
                 noteWithOctave: `C${startOctave + octaves}`,
             });
         }
+    }
+    private getMiddleOctave(): number {
+        const { startOctave, octaves } = this.options;
+        return Math.round((startOctave + octaves) / 2) + 1;
     }
 }
 
