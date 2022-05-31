@@ -16,7 +16,7 @@ npm i @moonwave99/paino --save
 ```
 
 ```js
-import 'node_modules/@moonwave99/paino/src/styles.paino.css';
+import "node_modules/@moonwave99/paino/src/styles.paino.css";
 import { init } from "@moonwave99/paino";
 
 init();
@@ -33,7 +33,7 @@ init();
 ```js
 import { Paino } from "@moonwave99/paino";
 
-const piano = new Paino({ el: '#my-element', octaves: 4 });
+const piano = new Paino({ el: "#my-element", octaves: 4 });
 piano.render();
 piano.setNotes(["C", "Eb", "G", "Bb"]);
 ```
@@ -62,4 +62,4 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-[example]: https://codepen.io/diego-spiced/pen/mdXLbMW
+[example]: https://codepen.io/moonwave99/pen/yLvjLKe
