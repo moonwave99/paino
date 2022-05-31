@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "declarationDir": "./dist",
+        "outDir": "./dist",
+        "module": "ES2020",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "allowSyntheticDefaultImports": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "target": "es2017",
+        "types": ["node"]
+    },
+    "include": ["typings.d.ts", "src/**/*.ts"],
+    "exclude": ["node_modules"]
+}
