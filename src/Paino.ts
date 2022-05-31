@@ -80,6 +80,28 @@ const CHROMATIC_SCALE: ScaleNote[] = [
     },
 ];
 
+function parseNote(note: string): {
+    chroma: number;
+    note: string;
+    octave: number;
+} {
+    let octave;
+    const maybeOctave = note.slice(-1);
+    if (Number.isInteger(+maybeOctave)) {
+        octave = +maybeOctave;
+        note = note.slice(0, -1);
+    }
+    const chroma = CHROMATIC_SCALE.find(
+        (x) => x.note === note || x.enharmonics.includes(note)
+    )?.chroma;
+
+    return {
+        chroma,
+        note,
+        octave,
+    };
+}
+
 export type Options = {
     el: string | HTMLElement;
     startOctave: number;
@@ -101,11 +123,18 @@ class Paino {
         this.options = Object.assign({}, defaultOptions, options);
     }
     setNotes(notes: string[]): Paino {
-        notes.forEach((note) => {
-            this.wrapper
-                .querySelector(`.noteWithOctave-${note}`)
-                ?.classList.add("key-on");
-        });
+        const keys = [...this.wrapper.querySelectorAll(".key")];
+        notes.forEach((n) =>
+            keys
+                .find((el: HTMLElement) => {
+                    const { chroma, octave } = el.dataset;
+                    const parsed = parseNote(n);
+                    return (
+                        +chroma === parsed.chroma && +octave === parsed.octave
+                    );
+                })
+                ?.classList.add("key-on")
+        );
         return this;
     }
     clearNotes(): Paino {
