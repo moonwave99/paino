@@ -2,7 +2,7 @@
 
 Painless piano diagrams.
 
-![Paino examples](example_screenshot)
+![Paino examples][example_screenshot]
 
 ## Installation
 
