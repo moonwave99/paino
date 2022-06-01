@@ -1,8 +1,6 @@
 # Paino
 
-Painless piano diagrams.
-
-![Paino examples][example_screenshot]
+[Painless piano diagrams.][example]
 
 ## Installation
 
@@ -65,4 +63,3 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 [example]: https://codepen.io/moonwave99/pen/yLvjLKe
-[example_screenshot]: https://codepen.io/moonwave99/pen/yLvjLKe/image/large.png
