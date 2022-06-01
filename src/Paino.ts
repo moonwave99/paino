@@ -203,19 +203,21 @@ class Paino {
     private _setNotes(notes: string[], hand?: string): void {
         const middleOctave = this.getMiddleOctave();
         const keys = [...this.wrapper.querySelectorAll(".key")];
-        notes.forEach((n) =>
-            keys
-                .find((el: HTMLElement) => {
-                    const { chroma: dataChroma, octave: dataOctave } =
-                        el.dataset;
-                    const parsed = parseNote(n);
-                    const octave = parsed.octave || middleOctave;
-                    return (
-                        +dataChroma === parsed.chroma && +dataOctave === octave
-                    );
-                })
-                ?.classList.add("key-on", hand ? `${hand}-hand` : null)
-        );
+        notes.forEach((n) => {
+            const foundKey = keys.find((el: HTMLElement) => {
+                const { chroma: dataChroma, octave: dataOctave } = el.dataset;
+                const parsed = parseNote(n);
+                const octave = parsed.octave || middleOctave;
+                return +dataChroma === parsed.chroma && +dataOctave === octave;
+            });
+            if (!foundKey) {
+                return;
+            }
+            foundKey.classList.add("key-on");
+            if (hand) {
+                foundKey.classList.add(`${hand}-hand`);
+            }
+        });
     }
 }
 

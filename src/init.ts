@@ -44,9 +44,25 @@ export default function init(
         const piano = new Paino({ el, ...options });
         piano.render();
 
-        const notes = el.dataset.notes && JSON.parse(el.dataset.notes);
+        function getFromDataset(key: string) {
+            try {
+                return el.dataset && JSON.parse(el.dataset[key]);
+            } catch (error) {
+                return null;
+            }
+        }
+
+        const notes = getFromDataset("notes");
         if (notes) {
             piano.setNotes(notes);
+            return;
+        }
+
+        const right = getFromDataset("rightHand");
+        const left = getFromDataset("leftHand");
+
+        if (left && right) {
+            piano.setNotes({ left, right });
         }
     });
 }
