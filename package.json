@@ -1,6 +1,6 @@
 {
     "name": "@moonwave99/paino",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "Simple HTML/CSS Piano diagram generator",
     "main": "dist/paino.cjs.js",
     "module": "dist/paino.esm.js",
