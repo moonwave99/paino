@@ -1,6 +1,6 @@
 # Paino
 
-[Painless piano diagrams.][example]
+[Painless piano diagrams.][examples]
 
 ## Installation
 
@@ -13,7 +13,6 @@ npm i @moonwave99/paino --save
 ```html
 <p>This is a standard <strong>Cm7</strong> voicing:</p>
 <figure data-paino data-notes='["C","Eb","G","Bb"]'></figure>
-
 ```
 
 ```js
@@ -33,7 +32,6 @@ init();
     data-left-hand='["C4","G4"]'
     data-right-hand='["Eb5","Bb5"]'
 ></figure>
-
 ```
 
 ```js
