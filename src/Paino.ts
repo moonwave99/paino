@@ -121,29 +121,27 @@ export const DEFAULT_PAINO_OPTIONS = {
     withFinalC: true,
 };
 
+type SetNotesParams =
+    | string[]
+    | {
+          right: string[];
+          left: string[];
+      };
+
 class Paino {
     private options: Options;
     private wrapper: HTMLElement;
     constructor(options = {}) {
         this.options = Object.assign({}, DEFAULT_PAINO_OPTIONS, options);
     }
-    setNotes(notes: string[]): Paino {
+    setNotes(notes: SetNotesParams): Paino {
         this.clearNotes();
-        const middleOctave = this.getMiddleOctave();
-        const keys = [...this.wrapper.querySelectorAll(".key")];
-        notes.forEach((n) =>
-            keys
-                .find((el: HTMLElement) => {
-                    const { chroma: dataChroma, octave: dataOctave } =
-                        el.dataset;
-                    const parsed = parseNote(n);
-                    const octave = parsed.octave || middleOctave;
-                    return (
-                        +dataChroma === parsed.chroma && +dataOctave === octave
-                    );
-                })
-                ?.classList.add("key-on")
-        );
+        if (Array.isArray(notes)) {
+            this._setNotes(notes);
+        } else {
+            this._setNotes(notes.right, "right");
+            this._setNotes(notes.left, "left");
+        }
         return this;
     }
     clearNotes(): Paino {
@@ -201,6 +199,23 @@ class Paino {
     private getMiddleOctave(): number {
         const { startOctave, octaves } = this.options;
         return Math.round((startOctave + octaves) / 2) + 1;
+    }
+    private _setNotes(notes: string[], hand?: string): void {
+        const middleOctave = this.getMiddleOctave();
+        const keys = [...this.wrapper.querySelectorAll(".key")];
+        notes.forEach((n) =>
+            keys
+                .find((el: HTMLElement) => {
+                    const { chroma: dataChroma, octave: dataOctave } =
+                        el.dataset;
+                    const parsed = parseNote(n);
+                    const octave = parsed.octave || middleOctave;
+                    return (
+                        +dataChroma === parsed.chroma && +dataOctave === octave
+                    );
+                })
+                ?.classList.add("key-on", hand ? `${hand}-hand` : null)
+        );
     }
 }
 

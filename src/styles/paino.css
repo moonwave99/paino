@@ -5,6 +5,8 @@
     --paino-black-key-height: 60%;
     --paino-white-key-highlight-color: dodgerblue;
     --paino-black-key-highlight-color: dodgerblue;
+    --paino-white-key-left-hand-highlight-color: lightcoral;
+    --paino-black-key-left-hand-highlight-color: lightcoral;
 }
 
 .paino {
@@ -49,4 +51,12 @@
 
 .paino .key.color-black.key-on {
     background-color: var(--paino-black-key-highlight-color);
+}
+
+.paino .key.color-white.key-on.left-hand {
+    background-color: var(--paino-white-key-left-hand-highlight-color);
+}
+
+.paino .key.color-black.key-on.left-hand {
+    background-color: var(--paino-black-key-left-hand-highlight-color);
 }

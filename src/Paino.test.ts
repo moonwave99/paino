@@ -159,6 +159,68 @@ test.serial("Paino - setNotes - without octave", (t) => {
     );
 });
 
+test.serial("Paino - setNotes - hands", (t) => {
+    const piano = new Paino();
+
+    piano.render().setNotes({
+        right: ["Eb4", "Bb4"],
+        left: ["C3", "G3"],
+    });
+
+    const wrapper = document.querySelector("#paino");
+
+    t.is(wrapper.querySelectorAll(".right-hand").length, 2);
+    t.is(wrapper.querySelectorAll(".left-hand").length, 2);
+
+    t.deepEqual(
+        [...wrapper.querySelectorAll(".right-hand")].map((el: HTMLElement) => ({
+            ...el.dataset,
+        })),
+        [
+            {
+                chroma: "3",
+                color: "black",
+                enharmonics: "Eb",
+                note: "D#",
+                noteWithOctave: "D#4",
+                octave: "4",
+            },
+            {
+                chroma: "10",
+                color: "black",
+                enharmonics: "Bb",
+                note: "A#",
+                noteWithOctave: "A#4",
+                octave: "4",
+            },
+        ]
+    );
+
+    t.deepEqual(
+        [...wrapper.querySelectorAll(".left-hand")].map((el: HTMLElement) => ({
+            ...el.dataset,
+        })),
+        [
+            {
+                chroma: "0",
+                color: "white",
+                enharmonics: "B#",
+                note: "C",
+                noteWithOctave: "C3",
+                octave: "3",
+            },
+            {
+                chroma: "7",
+                color: "white",
+                enharmonics: "",
+                note: "G",
+                noteWithOctave: "G3",
+                octave: "3",
+            },
+        ]
+    );
+});
+
 test.serial("Paino - clearNotes", (t) => {
     const piano = new Paino();
 
