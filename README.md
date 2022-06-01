@@ -13,6 +13,7 @@ npm i @moonwave99/paino --save
 ```html
 <p>This is a standard <strong>Cm7</strong> voicing:</p>
 <figure data-paino data-notes='["C","Eb","G","Bb"]'></figure>
+
 ```
 
 ```js
@@ -22,7 +23,27 @@ import { init } from "@moonwave99/paino";
 init();
 ```
 
-[See example][example]
+## Two hands
+
+```html
+<p>This is a standard <strong>Cm7</strong> voicing played with both hands:</p>
+<figure
+    data-paino
+    data-octaves="4"
+    data-left-hand='["C4","G4"]'
+    data-right-hand='["Eb5","Bb5"]'
+></figure>
+
+```
+
+```js
+import "node_modules/@moonwave99/paino/src/styles.paino.css";
+import { init } from "@moonwave99/paino";
+
+init();
+```
+
+[See examples][examples]
 
 ## Programmatical usage
 
@@ -62,4 +83,4 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-[example]: https://codepen.io/moonwave99/pen/yLvjLKe
+[examples]: https://codepen.io/moonwave99/pen/yLvjLKe
