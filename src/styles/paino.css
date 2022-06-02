@@ -3,6 +3,7 @@
     --paino-white-key-width: 1.5rem;
     --paino-black-key-width: 1rem;
     --paino-black-key-height: 60%;
+    --paino-border-color: black;
     --paino-white-key-highlight-color: dodgerblue;
     --paino-black-key-highlight-color: dodgerblue;
     --paino-white-key-left-hand-highlight-color: lightcoral;
@@ -12,13 +13,13 @@
 .paino {
     height: var(--paino-height);
     width: fit-content;
-    border: 1px solid black;
+    border: 1px solid var(--paino-border-color);
     display: flex;
     overflow-x: auto;
 }
 
 .paino .key:not(:last-child) {
-    border-right: 1px solid black;
+    border-right: 1px solid var(--paino-border-color);
 }
 
 .paino .key.color-white {
@@ -27,14 +28,14 @@
 }
 
 .paino .key.color-black {
-    background-color: black;
+    background-color: var(--paino-border-color);
     height: var(--paino-black-key-height);
     width: var(--paino-black-key-width);
     margin: 0 0 0 calc(var(--paino-black-key-width) / -2);
     z-index: 1;
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    border-bottom: 1px solid var(--paino-border-color);
+    border-left: 1px solid var(--paino-border-color);
+    border-right: 1px solid var(--paino-border-color);
 }
 
 .paino .key.color-white:nth-of-type(12n + 3),
