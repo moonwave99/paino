@@ -4,6 +4,8 @@
     --paino-black-key-width: 1rem;
     --paino-black-key-height: 60%;
     --paino-border-color: black;
+    --piano-white-key-color: white;
+    --piano-black-key-color: black;
     --paino-white-key-highlight-color: dodgerblue;
     --paino-black-key-highlight-color: dodgerblue;
     --paino-white-key-left-hand-highlight-color: lightcoral;
@@ -24,11 +26,11 @@
 
 .paino .key.color-white {
     width: var(--paino-white-key-width);
-    background-color: white;
+    background-color: var(--piano-white-key-color);
 }
 
 .paino .key.color-black {
-    background-color: var(--paino-border-color);
+    background-color: var(--piano-black-key-color);
     height: var(--paino-black-key-height);
     width: var(--paino-black-key-width);
     margin: 0 0 0 calc(var(--paino-black-key-width) / -2);
