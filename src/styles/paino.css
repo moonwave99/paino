@@ -1,15 +1,23 @@
 :root {
-    --paino-height: 100px;
-    --paino-white-key-width: 1.5rem;
-    --paino-black-key-width: 1rem;
+    --paino-height: 4rem;
+    --paino-white-key-width: 1.2rem;
+    --paino-black-key-width: 0.8rem;
     --paino-black-key-height: 60%;
-    --paino-border-color: black;
+    --paino-border-color: rgba(0, 0, 0, 0.4);
     --piano-white-key-color: white;
-    --piano-black-key-color: black;
+    --piano-black-key-color: rgb(35, 35, 35);
     --paino-white-key-highlight-color: dodgerblue;
     --paino-black-key-highlight-color: dodgerblue;
     --paino-white-key-left-hand-highlight-color: lightcoral;
     --paino-black-key-left-hand-highlight-color: lightcoral;
+    --paino-white-key-soprano-highlight-color: dodgerblue;
+    --paino-black-key-soprano-highlight-color: dodgerblue;
+    --paino-white-key-alto-highlight-color: gold;
+    --paino-black-key-alto-highlight-color: gold;
+    --paino-white-key-tenor-highlight-color: lightgreen;
+    --paino-black-key-tenor-highlight-color: lightgreen;
+    --paino-white-key-bass-highlight-color: lightcoral;
+    --paino-black-key-bass-highlight-color: lightcoral;
 }
 
 .paino {
@@ -56,10 +64,42 @@
     background-color: var(--paino-black-key-highlight-color);
 }
 
-.paino .key.color-white.key-on.left-hand {
+.paino .key.color-white.key-on.left {
     background-color: var(--paino-white-key-left-hand-highlight-color);
 }
 
-.paino .key.color-black.key-on.left-hand {
+.paino .key.color-black.key-on.left {
     background-color: var(--paino-black-key-left-hand-highlight-color);
+}
+
+.paino .key.color-white.key-on.soprano {
+    background-color: var(--paino-white-key-soprano-highlight-color);
+}
+
+.paino .key.color-black.key-on.soprano {
+    background-color: var(--paino-black-key-soprano-highlight-color);
+}
+
+.paino .key.color-white.key-on.alto {
+    background-color: var(--paino-white-key-alto-highlight-color);
+}
+
+.paino .key.color-black.key-on.alto {
+    background-color: var(--paino-black-key-alto-highlight-color);
+}
+
+.paino .key.color-white.key-on.tenor {
+    background-color: var(--paino-white-key-tenor-highlight-color);
+}
+
+.paino .key.color-black.key-on.tenor {
+    background-color: var(--paino-black-key-tenor-highlight-color);
+}
+
+.paino .key.color-white.key-on.bass {
+    background-color: var(--paino-white-key-bass-highlight-color);
+}
+
+.paino .key.color-black.key-on.bass {
+    background-color: var(--paino-black-key-bass-highlight-color);
 }

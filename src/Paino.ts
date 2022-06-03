@@ -1,3 +1,5 @@
+import { paramCase } from "change-case";
+
 type ScaleNote = {
     chroma: number;
     color: "black" | "white";
@@ -121,12 +123,7 @@ export const DEFAULT_PAINO_OPTIONS = {
     withFinalC: true,
 };
 
-type SetNotesParams =
-    | string[]
-    | {
-          right: string[];
-          left: string[];
-      };
+type SetNotesParams = string[] | Record<string, string[]>;
 
 class Paino {
     private options: Options;
@@ -139,8 +136,9 @@ class Paino {
         if (Array.isArray(notes)) {
             this._setNotes(notes);
         } else {
-            this._setNotes(notes.right, "right");
-            this._setNotes(notes.left, "left");
+            for (const [key, value] of Object.entries(notes)) {
+                this._setNotes(value, key);
+            }
         }
         return this;
     }
@@ -172,7 +170,7 @@ class Paino {
 
             Object.entries(note).forEach(([key, value]) => {
                 span.dataset[key] = `${value}`;
-                span.classList.add(`${key}-${value}`);
+                span.classList.add(`${paramCase(key)}-${value}`);
             });
 
             this.wrapper.append(span);
@@ -200,7 +198,7 @@ class Paino {
         const { startOctave, octaves } = this.options;
         return Math.round((startOctave + octaves) / 2) + 1;
     }
-    private _setNotes(notes: string[], hand?: string): void {
+    private _setNotes(notes: string[], type?: string): void {
         const middleOctave = this.getMiddleOctave();
         const keys = [...this.wrapper.querySelectorAll(".key")];
         notes.forEach((n) => {
@@ -214,8 +212,8 @@ class Paino {
                 return;
             }
             foundKey.classList.add("key-on");
-            if (hand) {
-                foundKey.classList.add(`${hand}-hand`);
+            if (type) {
+                foundKey.classList.add(`${type}`);
             }
         });
     }

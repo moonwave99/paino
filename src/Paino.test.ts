@@ -169,11 +169,11 @@ test.serial("Paino - setNotes - hands", (t) => {
 
     const wrapper = document.querySelector("#paino");
 
-    t.is(wrapper.querySelectorAll(".right-hand").length, 2);
-    t.is(wrapper.querySelectorAll(".left-hand").length, 2);
+    t.is(wrapper.querySelectorAll(".right").length, 2);
+    t.is(wrapper.querySelectorAll(".left").length, 2);
 
     t.deepEqual(
-        [...wrapper.querySelectorAll(".right-hand")].map((el: HTMLElement) => ({
+        [...wrapper.querySelectorAll(".right")].map((el: HTMLElement) => ({
             ...el.dataset,
         })),
         [
@@ -197,7 +197,7 @@ test.serial("Paino - setNotes - hands", (t) => {
     );
 
     t.deepEqual(
-        [...wrapper.querySelectorAll(".left-hand")].map((el: HTMLElement) => ({
+        [...wrapper.querySelectorAll(".left")].map((el: HTMLElement) => ({
             ...el.dataset,
         })),
         [

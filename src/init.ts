@@ -1,9 +1,5 @@
 import Paino, { Options, DEFAULT_PAINO_OPTIONS } from "./Paino";
 
-type InitOptions = {
-    elements: string | NodeList;
-};
-
 function parseOptions(el: HTMLElement): Options {
     const options = {} as Record<string, string | number | boolean>;
 
@@ -30,6 +26,60 @@ const DEFAULT_INIT_OPTIONS = {
     elements: "[data-paino]",
 };
 
+type InitOptions = {
+    elements: string | NodeList;
+};
+
+function endsWithOctave(note: string) {
+    const maybeOctave = note.slice(-1);
+    return Number.isInteger(+maybeOctave);
+}
+
+function padWithOctave(note: string, octave = 3) {
+    return `${note}${endsWithOctave(note) ? "" : octave}`;
+}
+
+function parseNotes(notes: string, pad = 3) {
+    return notes
+        .trim()
+        .split(" ")
+        .map((x) => padWithOctave(x, pad));
+}
+
+function parseHands(notes: string) {
+    const [left, right] = notes.split(",");
+    if (!left || !right) {
+        throw new Error('Hands input should be like "A B, C D"');
+    }
+    const leftTokens = parseNotes(left);
+    const rightTokens = parseNotes(right, 4);
+    return {
+        notes: [...leftTokens, ...rightTokens],
+        left: leftTokens,
+        right: rightTokens,
+    };
+}
+
+function parseSatb(notes: string) {
+    const tokens = notes.split(",").map(parseNotes);
+    if (tokens.length !== 4) {
+        throw new Error('SATB input should be like "A, B, C, D"');
+    }
+    return {
+        notes: tokens.flat(),
+        soprano: tokens[3],
+        alto: tokens[2],
+        tenor: tokens[1],
+        bass: tokens[0],
+    };
+}
+
+export const parsers = {
+    notes: parseNotes,
+    notesHands: parseHands,
+    notesSatb: parseSatb,
+};
+
 export default function init(
     options: InitOptions = DEFAULT_INIT_OPTIONS
 ): void {
@@ -44,25 +94,33 @@ export default function init(
         const piano = new Paino({ el, ...options });
         piano.render();
 
-        function getFromDataset(key: string) {
-            try {
-                return el.dataset && JSON.parse(el.dataset[key]);
-            } catch (error) {
-                return null;
+        Object.entries(parsers).forEach(([key, handler]) => {
+            if (el.dataset[key]) {
+                piano.setNotes(handler(el.dataset[key]));
             }
-        }
+        });
 
-        const notes = getFromDataset("notes");
-        if (notes) {
-            piano.setNotes(notes);
+        const otherNotes = Object.keys(el.dataset)
+            .filter(
+                (x) =>
+                    x.startsWith("notes") &&
+                    !Object.keys(parsers).includes(x.replace("notes-", ""))
+            )
+            .reduce(
+                (memo, key) => ({
+                    ...memo,
+                    ...{
+                        [key.replace("notes", "").toLowerCase()]: parseNotes(
+                            el.dataset[key]
+                        ),
+                    },
+                }),
+                {}
+            );
+
+        if (!Object.keys(otherNotes).length) {
             return;
         }
-
-        const right = getFromDataset("rightHand");
-        const left = getFromDataset("leftHand");
-
-        if (left && right) {
-            piano.setNotes({ left, right });
-        }
+        piano.setNotes(otherNotes);
     });
 }

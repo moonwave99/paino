@@ -37,7 +37,7 @@ test.serial("init", (t) => {
 test.serial("init - with notes", (t) => {
     document.body.innerHTML = `
     <main>
-        <div data-paino data-notes='["C3","G3","Eb4","Bb4"]' data-octaves="3"></div>
+        <div data-paino data-notes="C3 G3 Eb4 Bb4" data-octaves="3"></div>
     </main>`;
     init();
 
@@ -87,13 +87,13 @@ test.serial("init - with notes", (t) => {
 test.serial("init - with hands", (t) => {
     document.body.innerHTML = `
     <main>
-        <div data-paino data-left-hand='["C3","G3"]' data-right-hand='["Eb4","Bb4"]' data-octaves="3"></div>
+        <div data-paino data-notes-hands="C3 G3, Eb4 Bb4" data-octaves="3"></div>
     </main>`;
     init();
 
     const wrapper = document.querySelector(".paino");
     t.deepEqual(
-        [...wrapper.querySelectorAll(".right-hand")].map((el: HTMLElement) => ({
+        [...wrapper.querySelectorAll(".right")].map((el: HTMLElement) => ({
             ...el.dataset,
         })),
         [
@@ -117,7 +117,91 @@ test.serial("init - with hands", (t) => {
     );
 
     t.deepEqual(
-        [...wrapper.querySelectorAll(".left-hand")].map((el: HTMLElement) => ({
+        [...wrapper.querySelectorAll(".left")].map((el: HTMLElement) => ({
+            ...el.dataset,
+        })),
+        [
+            {
+                chroma: "0",
+                color: "white",
+                enharmonics: "B#",
+                note: "C",
+                noteWithOctave: "C3",
+                octave: "3",
+            },
+            {
+                chroma: "7",
+                color: "white",
+                enharmonics: "",
+                note: "G",
+                noteWithOctave: "G3",
+                octave: "3",
+            },
+        ]
+    );
+});
+
+test.serial("init - with SATB", (t) => {
+    document.body.innerHTML = `
+    <main>
+        <div data-paino data-notes-satb="C3, G3, Eb4, Bb4" data-octaves="3"></div>
+    </main>`;
+    init();
+
+    const wrapper = document.querySelector(".paino");
+
+    t.deepEqual(
+        ["soprano", "alto", "tenor", "bass"].map((x) => ({
+            ...(wrapper.querySelector(`.${x}`) as HTMLElement).dataset,
+        })),
+        [
+            {
+                chroma: "10",
+                color: "black",
+                enharmonics: "Bb",
+                note: "A#",
+                noteWithOctave: "A#4",
+                octave: "4",
+            },
+            {
+                chroma: "3",
+                color: "black",
+                enharmonics: "Eb",
+                note: "D#",
+                noteWithOctave: "D#4",
+                octave: "4",
+            },
+            {
+                chroma: "7",
+                color: "white",
+                enharmonics: "",
+                note: "G",
+                noteWithOctave: "G3",
+                octave: "3",
+            },
+            {
+                chroma: "0",
+                color: "white",
+                enharmonics: "B#",
+                note: "C",
+                noteWithOctave: "C3",
+                octave: "3",
+            },
+        ]
+    );
+});
+
+test.serial("init - with custom note", (t) => {
+    document.body.innerHTML = `
+    <main>
+        <div data-paino data-notes-custom="C3 G3"></div>
+    </main>`;
+    init();
+
+    const wrapper = document.querySelector(".paino");
+
+    t.deepEqual(
+        [...wrapper.querySelectorAll(".custom")].map((el: HTMLElement) => ({
             ...el.dataset,
         })),
         [

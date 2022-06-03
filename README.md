@@ -12,7 +12,7 @@ npm i @moonwave99/paino --save
 
 ```html
 <p>This is a standard <strong>Cm7</strong> voicing:</p>
-<figure data-paino data-notes='["C","Eb","G","Bb"]'></figure>
+<figure data-paino data-notes="C Eb G Bb"></figure>
 ```
 
 ```js
@@ -20,25 +20,36 @@ import "node_modules/@moonwave99/paino/src/styles.paino.css";
 import { init } from "@moonwave99/paino";
 
 init();
+```
+
+`init` will look for all the `[data-paino]` elements on the page. Alternatively one can call:
+
+```js
+init({
+    elements: '<selector>' | document.querySelectorAll(...)
+});
 ```
 
 ## Two hands
 
 ```html
-<p>This is a standard <strong>Cm7</strong> voicing played with both hands:</p>
+<p>This is a <strong>Cm7</strong> voicing played with both hands:</p>
 <figure
     data-paino
     data-octaves="4"
-    data-left-hand='["C4","G4"]'
-    data-right-hand='["Eb5","Bb5"]'
+    data-notes-hands="C4 G4, Eb5 Bb5"
 ></figure>
 ```
 
-```js
-import "node_modules/@moonwave99/paino/src/styles.paino.css";
-import { init } from "@moonwave99/paino";
+## SATB
 
-init();
+```html
+<p>This is a <strong>Cm7</strong> highlighted in four part harmony fashion:</p>
+<figure
+    data-paino
+    data-octaves="4"
+    data-notes-satb="C4, G4, Eb5, Bb5"
+></figure>
 ```
 
 [See examples][examples]
