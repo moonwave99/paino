@@ -1,13 +1,13 @@
 {
     "name": "@moonwave99/paino",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "Simple HTML/CSS Piano diagram generator",
     "source": "src/index.ts",
     "main": "dist/paino.cjs.js",
     "module": "dist/paino.esm.js",
-    "browser": "dist/paino.umd.js",
     "types": "dist/index.d.ts",
     "type": "module",
+    "browserslist": "> 0.5%, last 2 versions, not dead",
     "targets": {
         "default": {
             "distDir": "./dist"
