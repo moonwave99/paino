@@ -37,6 +37,56 @@ test.serial("init", (t) => {
 test.serial("init - with notes", (t) => {
     document.body.innerHTML = `
     <main>
+        <div data-paino data-notes="Fb Gb Abb Cb" data-octaves="3"></div>
+    </main>`;
+    init();
+
+    const wrapper = document.querySelector(".paino");
+
+    t.deepEqual(
+        [...wrapper.querySelectorAll(".key-on")].map((el: HTMLElement) => ({
+            ...el.dataset,
+        })),
+        [
+            {
+                chroma: "4",
+                color: "white",
+                midi: '64',
+                note: "E",
+                noteWithOctave: "E4",
+                octave: "4",
+            },
+            {
+                chroma: "6",
+                color: "black",
+                midi: '66',
+                note: "F#",
+                noteWithOctave: "F#4",
+                octave: "4",
+            },
+            {
+                chroma: "7",
+                color: "white",
+                midi: '67',
+                note: "G",
+                noteWithOctave: "G4",
+                octave: "4",
+            },
+            {
+                chroma: "11",
+                color: "white",
+                midi: '71',
+                note: "B",
+                noteWithOctave: "B4",
+                octave: "4",
+            },
+        ]
+    );
+});
+
+test.serial("init - with enrharmonic notes", (t) => {
+    document.body.innerHTML = `
+    <main>
         <div data-paino data-notes="C3 G3 Eb4 Bb4" data-octaves="3"></div>
     </main>`;
     init();

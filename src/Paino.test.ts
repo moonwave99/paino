@@ -81,7 +81,7 @@ test.serial("Paino - setNotes", (t) => {
 test.serial("Paino - setNotes - enharmonics", (t) => {
     const piano = new Paino();
 
-    piano.render().setNotes(["C4", "Eb4", "G4"]);
+    piano.render().setNotes(["Fb", "Gb", "Abb", "Cb"]);
 
     const wrapper = document.querySelector("#paino");
 
@@ -91,19 +91,19 @@ test.serial("Paino - setNotes - enharmonics", (t) => {
         })),
         [
             {
-                chroma: "0",
+                chroma: "4",
                 color: "white",
-                midi: '60',
-                note: "C",
-                noteWithOctave: "C4",
+                midi: '64',
+                note: "E",
+                noteWithOctave: "E4",
                 octave: "4",
             },
             {
-                chroma: "3",
+                chroma: "6",
                 color: "black",
-                midi: '63',
-                note: "D#",
-                noteWithOctave: "D#4",
+                midi: '66',
+                note: "F#",
+                noteWithOctave: "F#4",
                 octave: "4",
             },
             {
@@ -112,6 +112,14 @@ test.serial("Paino - setNotes - enharmonics", (t) => {
                 midi: '67',
                 note: "G",
                 noteWithOctave: "G4",
+                octave: "4",
+            },
+            {
+                chroma: "11",
+                color: "white",
+                midi: '71',
+                note: "B",
+                noteWithOctave: "B4",
                 octave: "4",
             },
         ]
