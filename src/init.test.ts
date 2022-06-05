@@ -51,7 +51,7 @@ test.serial("init - with notes", (t) => {
             {
                 chroma: "0",
                 color: "white",
-                enharmonics: "B#",
+                midi: "48",
                 note: "C",
                 noteWithOctave: "C3",
                 octave: "3",
@@ -59,7 +59,7 @@ test.serial("init - with notes", (t) => {
             {
                 chroma: "7",
                 color: "white",
-                enharmonics: "",
+                midi: "55",
                 note: "G",
                 noteWithOctave: "G3",
                 octave: "3",
@@ -67,7 +67,7 @@ test.serial("init - with notes", (t) => {
             {
                 chroma: "3",
                 color: "black",
-                enharmonics: "Eb",
+                midi: "63",
                 note: "D#",
                 noteWithOctave: "D#4",
                 octave: "4",
@@ -75,7 +75,7 @@ test.serial("init - with notes", (t) => {
             {
                 chroma: "10",
                 color: "black",
-                enharmonics: "Bb",
+                midi: "70",
                 note: "A#",
                 noteWithOctave: "A#4",
                 octave: "4",
@@ -100,7 +100,7 @@ test.serial("init - with hands", (t) => {
             {
                 chroma: "3",
                 color: "black",
-                enharmonics: "Eb",
+                midi: "63",
                 note: "D#",
                 noteWithOctave: "D#4",
                 octave: "4",
@@ -108,7 +108,7 @@ test.serial("init - with hands", (t) => {
             {
                 chroma: "10",
                 color: "black",
-                enharmonics: "Bb",
+                midi: "70",
                 note: "A#",
                 noteWithOctave: "A#4",
                 octave: "4",
@@ -124,7 +124,7 @@ test.serial("init - with hands", (t) => {
             {
                 chroma: "0",
                 color: "white",
-                enharmonics: "B#",
+                midi: "48",
                 note: "C",
                 noteWithOctave: "C3",
                 octave: "3",
@@ -132,7 +132,7 @@ test.serial("init - with hands", (t) => {
             {
                 chroma: "7",
                 color: "white",
-                enharmonics: "",
+                midi: "55",
                 note: "G",
                 noteWithOctave: "G3",
                 octave: "3",
@@ -158,7 +158,7 @@ test.serial("init - with SATB", (t) => {
             {
                 chroma: "10",
                 color: "black",
-                enharmonics: "Bb",
+                midi: "70",
                 note: "A#",
                 noteWithOctave: "A#4",
                 octave: "4",
@@ -166,7 +166,7 @@ test.serial("init - with SATB", (t) => {
             {
                 chroma: "3",
                 color: "black",
-                enharmonics: "Eb",
+                midi: "63",
                 note: "D#",
                 noteWithOctave: "D#4",
                 octave: "4",
@@ -174,7 +174,7 @@ test.serial("init - with SATB", (t) => {
             {
                 chroma: "7",
                 color: "white",
-                enharmonics: "",
+                midi: "55",
                 note: "G",
                 noteWithOctave: "G3",
                 octave: "3",
@@ -182,7 +182,7 @@ test.serial("init - with SATB", (t) => {
             {
                 chroma: "0",
                 color: "white",
-                enharmonics: "B#",
+                midi: "48",
                 note: "C",
                 noteWithOctave: "C3",
                 octave: "3",
@@ -208,7 +208,7 @@ test.serial("init - with custom note", (t) => {
             {
                 chroma: "0",
                 color: "white",
-                enharmonics: "B#",
+                midi: "48",
                 note: "C",
                 noteWithOctave: "C3",
                 octave: "3",
@@ -216,7 +216,7 @@ test.serial("init - with custom note", (t) => {
             {
                 chroma: "7",
                 color: "white",
-                enharmonics: "",
+                midi: "55",
                 note: "G",
                 noteWithOctave: "G3",
                 octave: "3",

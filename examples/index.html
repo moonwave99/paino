@@ -1,60 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Paino Examples</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="stylesheet" href="/styles.css" />
-    </head>
 
-    <body>
-        <main>
-            <h1>Paino Examples</h1>
-            <section>
-                <h2>Basic</h2>
-                <figure data-paino></figure>
-            </section>
+<head>
+    <title>Paino Examples</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="/styles.css" />
+</head>
 
-            <section>
-                <h2>With Options</h2>
-                <figure
-                    data-paino
-                    data-octaves="5"
-                    data-with-final-C="false"
-                ></figure>
-            </section>
+<body>
+    <main>
+        <h1>Paino Examples</h1>
+        <section>
+            <h2>Basic</h2>
+            <figure data-paino></figure>
+        </section>
 
-            <section>
-                <h2>Set Notes</h2>
-                <figure data-paino data-notes="C Eb G Bb"></figure>
-            </section>
+        <section>
+            <h2>With Options</h2>
+            <figure data-paino data-octaves="5" data-with-final-C="false"></figure>
+        </section>
 
-            <section>
-                <h2>Look ma with both hands!</h2>
-                <figure
-                    data-paino
-                    data-octaves="4"
-                    data-notes-hands="C4 G4, Eb5 Bb5"
-                ></figure>
-            </section>
+        <section>
+            <h2>Set Notes</h2>
+            <figure data-paino data-notes="C Eb G Bb"></figure>
+        </section>
 
-            <section>
-                <h2>Four Parts?</h2>
-                <figure
-                    data-paino
-                    data-octaves="4"
-                    data-notes-satb="C4, G4, Eb5, Bb5"
-                ></figure>
-            </section>
+        <section>
+            <h2>Enharmonics</h2>
+            <figure data-paino data-notes="Fb Gb Abb Cb"></figure>
+        </section>
 
-            <section>
-                <h2>Custom Parts</h2>
-                <figure
-                    data-paino
-                    data-octaves="4"
-                    data-notes-comping="C4 G4 Eb5 Bb5"
-                    data-notes-voice="G6"
-                ></figure>
-            </section>
-        </main>
-    </body>
+        <section>
+            <h2>Look ma with both hands!</h2>
+            <figure data-paino data-octaves="4" data-notes-hands="C4 G4, Eb5 Bb5"></figure>
+        </section>
+
+        <section>
+            <h2>Four Parts?</h2>
+            <figure data-paino data-octaves="4" data-notes-satb="C4, G4, Eb5, Bb5"></figure>
+        </section>
+
+        <section>
+            <h2>Custom Parts</h2>
+            <figure data-paino data-octaves="4" data-notes-comping="C4 G4 Eb5 Bb5" data-notes-voice="G6"></figure>
+        </section>
+    </main>
+</body>
+
 </html>

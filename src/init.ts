@@ -30,20 +30,10 @@ type InitOptions = {
     elements: string | NodeList;
 };
 
-function endsWithOctave(note: string) {
-    const maybeOctave = note.slice(-1);
-    return Number.isInteger(+maybeOctave);
-}
-
-function padWithOctave(note: string, octave = 3) {
-    return `${note}${endsWithOctave(note) ? "" : octave}`;
-}
-
-function parseNotes(notes: string, pad = 3) {
+function parseNotes(notes: string) {
     return notes
         .trim()
-        .split(" ")
-        .map((x) => padWithOctave(x, pad));
+        .split(" ");
 }
 
 function parseHands(notes: string) {
@@ -52,7 +42,7 @@ function parseHands(notes: string) {
         throw new Error('Hands input should be like "A B, C D"');
     }
     const leftTokens = parseNotes(left);
-    const rightTokens = parseNotes(right, 4);
+    const rightTokens = parseNotes(right);
     return {
         notes: [...leftTokens, ...rightTokens],
         left: leftTokens,

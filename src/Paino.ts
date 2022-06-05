@@ -1,15 +1,15 @@
+import { get as getNote } from "@tonaljs/note";
+import { toMidi } from "@tonaljs/midi";
 import { paramCase } from "change-case";
 
 type ScaleNote = {
     chroma: number;
     color: "black" | "white";
     note: string;
-    enharmonics?: string[];
 };
 
 type ScaleNoteWithOctave = ScaleNote & {
     octave: number;
-    noteWithOctave: string;
 };
 
 const CHROMATIC_SCALE: ScaleNote[] = [
@@ -17,95 +17,82 @@ const CHROMATIC_SCALE: ScaleNote[] = [
         chroma: 0,
         color: "white",
         note: "C",
-        enharmonics: ["B#"],
     },
     {
         chroma: 1,
         color: "black",
         note: "C#",
-        enharmonics: ["Db"],
     },
     {
         chroma: 2,
         color: "white",
         note: "D",
-        enharmonics: [],
     },
     {
         chroma: 3,
         color: "black",
         note: "D#",
-        enharmonics: ["Eb"],
     },
     {
         chroma: 4,
         color: "white",
         note: "E",
-        enharmonics: ["Fb"],
     },
     {
         chroma: 5,
         color: "white",
         note: "F",
-        enharmonics: ["E#"],
     },
     {
         chroma: 6,
         color: "black",
         note: "F#",
-        enharmonics: ["Gb"],
     },
     {
         chroma: 7,
         color: "white",
         note: "G",
-        enharmonics: [],
     },
     {
         chroma: 8,
         color: "black",
         note: "G#",
-        enharmonics: ["Ab"],
     },
     {
         chroma: 9,
         color: "white",
         note: "A",
-        enharmonics: [],
     },
     {
         chroma: 10,
         color: "black",
         note: "A#",
-        enharmonics: ["Bb"],
     },
     {
         chroma: 11,
         color: "white",
         note: "B",
-        enharmonics: ["Cb"],
     },
 ];
 
-function parseNote(note: string): {
+function parseNote(noteString: string, defaultOctave: number): {
     chroma: number;
     note: string;
     octave: number;
+    midi: number;
 } {
-    let octave;
-    const maybeOctave = note.slice(-1);
+    let octave = defaultOctave;
+    const maybeOctave = noteString.slice(-1);
     if (Number.isInteger(+maybeOctave)) {
         octave = +maybeOctave;
-        note = note.slice(0, -1);
+        noteString = noteString.slice(0, -1);
     }
-    const chroma = CHROMATIC_SCALE.find(
-        (x) => x.note === note || x.enharmonics.includes(note)
-    )?.chroma;
-
+    const { chroma, pc: note, oct, midi } = getNote(`${noteString}${octave}`);
     return {
         chroma,
         note,
-        octave,
+        octave: oct,
+        midi
     };
 }
 
@@ -135,11 +122,12 @@ class Paino {
         this.clearNotes();
         if (Array.isArray(notes)) {
             this._setNotes(notes);
-        } else {
-            for (const [key, value] of Object.entries(notes)) {
-                this._setNotes(value, key);
-            }
+            return this;
         }
+        for (const [key, value] of Object.entries(notes)) {
+            this._setNotes(value, key);
+        }
+
         return this;
     }
     clearNotes(): Paino {
@@ -167,8 +155,13 @@ class Paino {
         const createKey = (note: ScaleNoteWithOctave): void => {
             const span = document.createElement("span");
             span.classList.add("key");
+            const noteWithOctave = `${note.note}${note.octave}`;
 
-            Object.entries(note).forEach(([key, value]) => {
+            Object.entries({
+                ...note,
+                noteWithOctave,
+                midi: toMidi(noteWithOctave)
+            }).forEach(([key, value]) => {
                 span.dataset[key] = `${value}`;
                 span.classList.add(`${paramCase(key)}-${value}`);
             });
@@ -181,7 +174,6 @@ class Paino {
                 createKey({
                     ...x,
                     octave: startOctave + octave,
-                    noteWithOctave: `${x.note}${startOctave + octave}`,
                 })
             )
         );
@@ -190,7 +182,6 @@ class Paino {
             createKey({
                 ...CHROMATIC_SCALE[0],
                 octave: startOctave + octaves,
-                noteWithOctave: `C${startOctave + octaves}`,
             });
         }
     }
@@ -200,14 +191,14 @@ class Paino {
     }
     private _setNotes(notes: string[], type?: string): void {
         const middleOctave = this.getMiddleOctave();
-        const keys = [...this.wrapper.querySelectorAll(".key")];
-        notes.forEach((n) => {
-            const foundKey = keys.find((el: HTMLElement) => {
-                const { chroma: dataChroma, octave: dataOctave } = el.dataset;
-                const parsed = parseNote(n);
-                const octave = parsed.octave || middleOctave;
-                return +dataChroma === parsed.chroma && +dataOctave === octave;
-            });
+        let octave = middleOctave;
+        notes.forEach((n, index) => {
+            if (index > 0 && n.startsWith('C')) {
+                octave++;
+            }
+            const parsed = parseNote(n, octave);
+
+            const foundKey = this.wrapper.querySelector(`.key.midi-${parsed.midi}`);
             if (!foundKey) {
                 return;
             }
