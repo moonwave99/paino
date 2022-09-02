@@ -6,9 +6,11 @@
     ],
     "scripts": {
         "lerna": "lerna bootstrap",
-        "release": "lerna publish --no-private --no-verify-access"
+        "build": "turbo run build",
+        "release": "npm run build && lerna publish --no-private --no-verify-access"
     },
     "devDependencies": {
-        "lerna": "^5.5.0"
+        "lerna": "^5.5.0",
+        "turbo": "^1.4.4"
     }
 }
