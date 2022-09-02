@@ -1,4 +1,4 @@
 import "../src/styles/paino.css";
-import { init } from "../dist/index.mjs";
+import { init } from "../dist/index.js";
 
 init();

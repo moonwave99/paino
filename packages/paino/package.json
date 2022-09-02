@@ -3,13 +3,14 @@
     "version": "0.1.13",
     "description": "Simple HTML/CSS Piano diagram generator",
     "source": "src/index.ts",
-    "main": "dist/index.mjs",
-    "browser": "dist/paino.cjs.js",
+    "main": "dist/index.js",
+    "type": "module",
+    "commonjs": "dist/paino.cjs",
     "types": "dist/index.d.ts",
     "browserslist": "> 0.5%, last 2 versions, not dead",
     "targets": {
-        "browser": {
-            "context": "browser",
+        "commonjs": {
+            "isLibrary": true,
             "outputFormat": "commonjs"
         }
     },
