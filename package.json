@@ -6,7 +6,7 @@
     ],
     "scripts": {
         "lerna": "lerna bootstrap",
-        "release": "lerna publish --no-private"
+        "release": "lerna publish --no-private --no-verify-access"
     },
     "devDependencies": {
         "lerna": "^5.5.0"

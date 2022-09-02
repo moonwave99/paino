@@ -30,9 +30,6 @@
         "type": "git",
         "url": "git+https://github.com/moonwave99/paino.git"
     },
-    "publishConfig": {
-        "registry": "https://npm.pkg.github.com/"
-    },
     "keywords": [
         "music",
         "piano",
@@ -78,5 +75,5 @@
         "@tonaljs/note": "^4.6.5",
         "change-case": "^4.1.2"
     },
-    "gitHead": "d8df2824e6bb5b896c17ace706ee5c405efff08e"
+    "gitHead": "6827e64cf890e66015d5fcb1dba9f87dd5012b4b"
 }
