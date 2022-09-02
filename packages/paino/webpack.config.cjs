@@ -7,6 +7,7 @@ const targetPath = path.join(__dirname, "examples_build");
 
 module.exports = {
     mode: "development",
+    devtool: "source-map",
     module: {
         rules: [
             {

@@ -13,6 +13,6 @@
         "target": "es2017",
         "types": ["node"]
     },
-    "include": ["typings.d.ts", "src/**/*.ts"],
+    "include": ["./typings.d.ts", "./src/**/*.ts"],
     "exclude": ["node_modules"]
 }
