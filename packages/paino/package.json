@@ -1,6 +1,6 @@
 {
     "name": "@moonwave99/paino",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "description": "Simple HTML/CSS Piano diagram generator",
     "source": "src/index.ts",
     "main": "dist/paino.cjs.js",
@@ -78,5 +78,5 @@
         "@tonaljs/note": "^4.6.5",
         "change-case": "^4.1.2"
     },
-    "gitHead": "04852f2c5b8fdfcfd9ba7385a96bd64e82d6aeb1"
+    "gitHead": "d8df2824e6bb5b896c17ace706ee5c405efff08e"
 }
