@@ -74,5 +74,6 @@
         "@tonaljs/midi": "^4.6.5",
         "@tonaljs/note": "^4.6.5",
         "change-case": "^4.1.2"
-    }
+    },
+    "gitHead": "90802a586830ee0eb37bf647af94744db5901832"
 }

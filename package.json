@@ -1,10 +1,14 @@
 {
-  "name": "root",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
-  "devDependencies": {
-    "lerna": "^5.5.0"
-  }
+    "name": "paino-workspace",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "lerna": "lerna bootstrap",
+        "release": "lerna publish --no-private"
+    },
+    "devDependencies": {
+        "lerna": "^5.5.0"
+    }
 }
